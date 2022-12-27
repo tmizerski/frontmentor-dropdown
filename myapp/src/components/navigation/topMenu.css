@@ -5,10 +5,12 @@
 }
 
 .topMenu-container {
-    width: 100%;
+    min-width: 0;
+    width: 100vw;
     height: 50px;
-    margin-bottom: auto;
-    margin-left: 20px;
+    margin-bottom: 10vh;
+    padding-left: 20px;
+    padding-right: 20px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -17,10 +19,13 @@
 
 .topMenu-list-container {
     width: 30%;
+    display: flex;
+    gap: 50px;
 }
 
 .menu-list {
     width: 100%;
+    margin-top: 10px;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -33,9 +38,83 @@
 
 .topMenu-button-container {
     margin-left: auto;
-    margin-right: 20px;
+    display: flex;
+    gap: 20px;
 }
 
 .logoMenu-container img {
     margin-top: 15px;
+}
+
+.menuButton {
+    width: 100px;
+    height: 35px;
+    border: none;
+    font-weight: bold;
+    color: var(--medium-grey);
+    background: var(--almost-white);
+    outline: none;
+    cursor: pointer;
+}
+.menuButton:hover {
+    color: var(--almost-black);
+}
+
+.menu-item {
+    position: relative;
+}
+
+
+.registerButton {
+    border: 2px solid var(--medium-grey);
+    border-radius: 10px;
+}
+
+.registerButton:hover {
+    border-color: var(--almost-black);
+}
+
+
+.dropDown ul {
+    z-index: 12;
+    position: absolute;
+    /*left: -50px;*/
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    width: 150px;
+    padding: 20px;
+    list-style: none;
+    background-color: white;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 0px 26px -16px rgba(66, 68, 90, 1);
+    -moz-box-shadow: 0px 0px 26px -16px rgba(66, 68, 90, 1);
+    box-shadow: 0px 0px 26px -16px rgba(66, 68, 90, 1);
+}
+.dropDown ul li {
+    display: flex;
+    align-items: center;
+    font-weight: normal;
+    cursor: pointer;
+    width: 120px;
+}
+
+.dropDown ul li:hover {
+    color: var(--almost-black);
+    font-weight: bold;
+}
+
+.dropDown ul li img {
+    margin-right: 10px;
+}
+
+.dimmer {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100vw;
+    height: 80vh;
+    background: transparent;
+    z-index: 10;
 }
