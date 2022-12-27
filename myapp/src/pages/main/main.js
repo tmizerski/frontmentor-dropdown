@@ -16,6 +16,7 @@ class Main extends React.Component {
 
     render(){
         return(
+            <div>
             <div className="mainContent-container">
                 <div className="mainLeft-container">
                     <h1>
@@ -36,6 +37,7 @@ class Main extends React.Component {
                     </section>
                 </div>
                 <div className="mainImg-container"><img src={imageHeroDesktop} alt={"main"}/></div>
+            </div>
             </div>
         )
     }
