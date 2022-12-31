@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import logo from "../../images/logo.svg";
 import "./topMenu.css";
 import todoIcon from '../../images/icon-todo.svg';
@@ -22,18 +23,22 @@ class Navigation extends React.Component{
             Features: [{
                 title: "Todo",
                 icon: todoIcon,
-            },
+                path: "/todoapp"
+                },
                 {
                     title: "Calendar",
+                    path: "/calendar",
                     icon: calendarIcon,
                 },
                 {
                     title: "Remainders",
                     icon: remainderIcon,
+                    path: "/remainder"
                 },
                 {
                     title: "Planning",
                     icon: planningIcon,
+                    path: "/planning"
                 }
             ],
             Company: [
@@ -55,7 +60,7 @@ class Navigation extends React.Component{
             <div className="topMenu-container">
                 <div className="topMenu-list-container">
                     <div className="logoMenu-container">
-                        <img src={logo} alt="logo"/>
+                        <Link to="/"><img src={logo} alt="logo"/></Link>
                     </div>
                     <ul className="menu-list">
                         {this.navMainOptions.map((main,k )=> {
@@ -71,7 +76,7 @@ class Navigation extends React.Component{
                                                 return <li>
                                                     {option.icon &&
                                                         <img src={option.icon} alt="menu icon"/>}
-                                                    {option.title}
+                                                    {option.path ? <Link to={option.path}>{option.title}</Link> : option.title}
                                                 </li>
                                             })}
                                         </ul>
@@ -84,8 +89,8 @@ class Navigation extends React.Component{
                 </div>
                 <div className="dimmer" style={this.state.activeArrow !== null ? {display: "block"} : {display: "none"}} onClick={()=>this.setState({activeArrow: null})}></div>
                 <div className="topMenu-button-container">
-                    <button className="loginButton menuButton">Login</button>
-                    <button className="registerButton menuButton">Register</button>
+                    <button className="loginButton menuButton"><Link to="/login">Login</Link></button>
+                    <button className="registerButton menuButton"><Link to="/register">Register</Link></button>
                 </div>
             </div>
         )
