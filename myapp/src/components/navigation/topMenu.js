@@ -73,10 +73,10 @@ class Navigation extends React.Component{
                                     {this.navOptions[main.title] && this.state.activeArrow === k &&
                                         <ul>
                                             {this.navOptions[main.title]?.map((option,k)=> {
-                                                return <li>
+                                                return <li onClick={()=>this.setState({activeArrow: null})}>
                                                     {option.icon &&
                                                         <img src={option.icon} alt="menu icon"/>}
-                                                    {option.path ? <Link to={option.path}>{option.title}</Link> : option.title}
+                                                    {option.path ? <Link to={option.path} >{option.title}</Link> : option.title}
                                                 </li>
                                             })}
                                         </ul>

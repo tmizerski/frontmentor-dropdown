@@ -9,6 +9,7 @@ import {
 import Login from "./components/Login/Login";
 import Main from "./pages/main/main";
 import SignUp from "./components/SingUp/SignUp";
+import {SnackBarContextProvider} from "./store/snackbar-context";
 
 const router = createBrowserRouter([
     {
@@ -45,13 +46,14 @@ const router = createBrowserRouter([
             }
         ]
     },
-
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+      <SnackBarContextProvider>
       <RouterProvider router={router} />
+      </SnackBarContextProvider>
   </React.StrictMode>
 );
 

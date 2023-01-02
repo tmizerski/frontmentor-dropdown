@@ -1,0 +1,8 @@
+a {
+    color: var(--almost-white);
+    text-decoration: none;
+}
+
+button:hover a {
+    color: var(--medium-grey);
+}
