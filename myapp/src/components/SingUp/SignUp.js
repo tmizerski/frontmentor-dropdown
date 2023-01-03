@@ -22,7 +22,7 @@ class SignUp extends React.Component {
 
     addUser(e) {
         e.preventDefault();
-        if(this.state.passOne !== this.state.passTwo) return this.context.displayMsg("Podane hasła różnią się");
+        if(this.state.passOne !== this.state.passTwo) return this.context.displayMsg("Podane hasła różnią się", "error");
         // axios.post("http://localhost:3500/addUser", {
         //
         // })

@@ -40,6 +40,18 @@
     padding: 8px;
 }
 
+.error {
+    background: red;
+}
+
+.access {
+    background: green;
+}
+
+.warning {
+    background: orange;
+}
+
 @keyframes slide-up {
     from {
         opacity: 0;

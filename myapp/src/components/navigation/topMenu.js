@@ -57,9 +57,9 @@ class Navigation extends React.Component{
 
     render() {
         return(
-            <div className="topMenu-container">
-                <div className="topMenu-list-container">
-                    <div className="logoMenu-container">
+            <div className="topMenu--container">
+                <div className="topMenu-list--container">
+                    <div className="logoMenu--container">
                         <Link to="/"><img src={logo} alt="logo"/></Link>
                     </div>
                     <ul className="menu-list">
@@ -88,7 +88,7 @@ class Navigation extends React.Component{
                     </ul>
                 </div>
                 <div className="dimmer" style={this.state.activeArrow !== null ? {display: "block"} : {display: "none"}} onClick={()=>this.setState({activeArrow: null})}></div>
-                <div className="topMenu-button-container">
+                <div className="topMenu-button--container">
                     <button className="loginButton menuButton"><Link to="/login">Login</Link></button>
                     <button className="registerButton menuButton"><Link to="/register">Register</Link></button>
                 </div>

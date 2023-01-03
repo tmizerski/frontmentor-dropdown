@@ -4,7 +4,7 @@
     --almost-white: hsl(0, 0%, 98%);
 }
 
-.topMenu-container {
+.topMenu--container {
     min-width: 0;
     width: 100vw;
     height: 50px;
@@ -17,7 +17,7 @@
     gap: 20px;
 }
 
-.topMenu-list-container {
+.topMenu-list--container {
     width: 30%;
     display: flex;
     gap: 50px;
@@ -36,13 +36,13 @@
     color: var(--medium-grey);
 }
 
-.topMenu-button-container {
+.topMenu-button--container {
     margin-left: auto;
     display: flex;
     gap: 20px;
 }
 
-.logoMenu-container img {
+.logoMenu--container img {
     margin-top: 15px;
 }
 
@@ -72,6 +72,7 @@
 
 .registerButton:hover {
     border-color: var(--almost-black);
+    color: var(--almost-black);
 }
 
 
@@ -119,7 +120,12 @@
     z-index: 10;
 }
 
-a {
+.topMenu--container a {
     color: var(--almost-black);
     text-decoration: none;
+}
+
+.topMenu--container a:hover, .topMenu-button--container a:hover{
+    color: var(--almost-black);
+    font-weight: bolder;
 }
