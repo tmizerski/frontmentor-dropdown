@@ -66,6 +66,7 @@
 
 
 .registerButton {
+    color: var(--medium-grey);
     border: 2px solid var(--medium-grey);
     border-radius: 10px;
 }
@@ -121,7 +122,11 @@
 }
 
 .topMenu--container a {
-    color: var(--almost-black);
+    display: inline-block;
+    height: 100%;
+    width:100%;
+    line-height: 30px;
+    color: var(--medium-grey);
     text-decoration: none;
 }
 

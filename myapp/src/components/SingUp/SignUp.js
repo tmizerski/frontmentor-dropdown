@@ -16,6 +16,7 @@ class SignUp extends React.Component {
             login: null,
             passOne: null,
             passTwo: null,
+            email: null,
         }
     }
 
@@ -23,9 +24,21 @@ class SignUp extends React.Component {
     addUser(e) {
         e.preventDefault();
         if(this.state.passOne !== this.state.passTwo) return this.context.displayMsg("Podane hasła różnią się", "error");
-        // axios.post("http://localhost:3500/addUser", {
-        //
-        // })
+        fetch("http://localhost:5000/siqnup",{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                firstName: this.state.firstName,
+                login: this.state.login,
+                email: this.state.email,
+                password: this.state.passOne,
+            })
+        }).then(r => {
+            if(r.status === 200) this.context.displayMsg(`Rejestracja zakończona`, "access")
+            else this.context.displayMsg(`Wypełnij formularz poprawnie`, "error")
+        })
     }
 
     render(){
@@ -39,8 +52,8 @@ class SignUp extends React.Component {
                     <form>
                         <label htmlFor="firstName-input">First name:</label>
                         <input id="firstName-input" type="text" required placeholder="First name..." onChange={(e)=>this.state.firstName = e.target.value}/>
-                        <label htmlFor="lastName-input">Last name:</label>
-                        <input id="lastName-input" type="text" required placeholder="Last name..." onChange={(e)=>this.state.lastName = e.target.value}/>
+                        <label htmlFor="email-input">Email:</label>
+                        <input id="email-input" type="text" required placeholder="Email..." onChange={(e)=>this.state.email = e.target.value}/>
                         <label htmlFor="login-input">Login:</label>
                         <input id="login-input" type="text" required placeholder="Login..." onChange={(e)=>this.state.login = e.target.value}/>
                         <label htmlFor="pass-input">Password:</label>
