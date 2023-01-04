@@ -1,78 +1,83 @@
-import React from "react";
+import {useContext, useState} from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-
 import "./SignUp.css";
 import Snackbar from "../Snackbar/Snackbar";
-import SnackbarContext from "../../store/snackbar-context";
+import SnackbarContext from "../../store/SnackbarContext";
+import {AuthContext} from "../../store/AuthContext";
 
-class SignUp extends React.Component {
-    constructor(props) {
-        super(props);
+const SignUp = (props) => {
+    const  [firstName, setFirstName] = useState('');
+    const  [passOne, setPassOne] = useState('');
+    const  [passTwo, setPassTwo] = useState('');
+    const  [email, setEmail] = useState('');
+    const  [loading, setLoading] = useState(null);
+    const  [error, setError] = useState(null)
 
-        this.state = {
-            firstName: null,
-            lastName: null,
-            login: null,
-            passOne: null,
-            passTwo: null,
-            email: null,
-        }
-    }
+    const snackbar = useContext(SnackbarContext);
+    const authContext = useContext(AuthContext);
 
 
-    addUser(e) {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        if(this.state.passOne !== this.state.passTwo) return this.context.displayMsg("Podane hasła różnią się", "error");
-        fetch("http://localhost:5000/siqnup",{
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                firstName: this.state.firstName,
-                login: this.state.login,
-                email: this.state.email,
-                password: this.state.passOne,
-            })
-        }).then(r => {
-            if(r.status === 200) this.context.displayMsg(`Rejestracja zakończona`, "access")
-            else this.context.displayMsg(`Wypełnij formularz poprawnie`, "error")
+        setLoading(true);
+        setError(null);
+        if (passOne !== passTwo) return snackbar.displayMsg("Your passwords are different", "error");
+        axios.post("http://localhost:5000/signup", {
+            firstName,
+            email,
+            password: passOne,
+            role: "user"
+        })
+            .then(r => {
+                if (r.status === 200) {
+                    snackbar.displayMsg(`Sign up successfully`, "access");
+                    console.log(r.data)
+                    //save user to local storage
+                    localStorage.setItem("user", r.data)
+                    //update auth context
+                    authContext.dispatch({type: 'LOGIN', payload: r.data})
+                    setLoading(false)
+                }
+            }).catch(err => {
+            snackbar.displayMsg(`${err.response.data}`, "error")
+
         })
     }
+    return (
 
-    render(){
-        return(
-            <div className="login-dimmer">
-                <div className="login-form--container">
-                    <div className="login-text--container">
-                        <h2>Welcome!</h2>
-                        <span>Please complete sing up form</span>
-                    </div>
-                    <form>
-                        <label htmlFor="firstName-input">First name:</label>
-                        <input id="firstName-input" type="text" required placeholder="First name..." onChange={(e)=>this.state.firstName = e.target.value}/>
-                        <label htmlFor="email-input">Email:</label>
-                        <input id="email-input" type="text" required placeholder="Email..." onChange={(e)=>this.state.email = e.target.value}/>
-                        <label htmlFor="login-input">Login:</label>
-                        <input id="login-input" type="text" required placeholder="Login..." onChange={(e)=>this.state.login = e.target.value}/>
-                        <label htmlFor="pass-input">Password:</label>
-                        <input id="pass-input" type="password" required placeholder="Password..." onChange={(e)=>this.state.passOne = e.target.value}/>
-                        <label htmlFor="passRepeat-input">Repeat password:</label>
-                        <input id="pass-input" type="password" required placeholder="Password..." onChange={(e)=>this.state.passTwo = e.target.value}/>
-                        <div className="login-button--holder">
-                            <button onClick={(e)=>this.addUser(e)}>Sign Up!</button>
-                            <button><Link to="/">Cancel</Link></button>
-                        </div>
-                    </form>
+        <div className="login-dimmer">
+            <div className="login-form--container">
+                <div className="login-text--container">
+                    <h2>Welcome!</h2>
+                    <span>Please complete sing up form</span>
                 </div>
-                {this.context.isDisplayed && <Snackbar />}
+                <form onSubmit={(e) => handleSubmit(e)}>
+                    <label htmlFor="firstName-input">First name:</label>
+                    <input id="firstName-input" type="text" required placeholder="First name..."
+                           onChange={(e) => setFirstName(e.target.value)}/>
+                    <label htmlFor="email-input">Email:</label>
+                    <input id="email-input" type="email" required placeholder="Email..."
+                           onChange={(e) => setEmail(e.target.value)}/>
+                    <label htmlFor="pass-input">Password:</label>
+                    <input id="passOne-input" autoComplete="false" type="password" required
+                           placeholder="Password..."
+                           onChange={(e) =>  setPassOne(e.target.value)}/>
+                    <label htmlFor="passRepeat-input">Repeat password:</label>
+                    <input id="passTwo-input" autoComplete="false" type="password" required
+                           placeholder="Password..."
+                           onChange={(e) => setPassTwo(e.target.value)}/>
+                    <div className="login-button--holder">
+                        <button type="submit" disabled={loading}>Sign Up!</button>
+                        <button type="button"><Link to="/">Cancel</Link></button>
+                    </div>
+                    <span style={{fontSize: "12px"}}>Have an account? Login
+                        <Link to="/login" style={{color: "blue"}}>here</Link></span>
+                </form>
             </div>
-
-        )
-    }
+            {snackbar.isDisplayed && <Snackbar/>}
+        </div>
+    )
 }
-
-SignUp.contextType = SnackbarContext;
 
 export default SignUp;

@@ -1,6 +1,6 @@
 import React, {useContext} from "react";
 import "./Snackbar.css";
-import SnackbarContext from "../../store/snackbar-context";
+import SnackbarContext from "../../store/SnackbarContext";
 
 const Snackbar = (props) => {
     const snackbarCtx = useContext(SnackbarContext);

@@ -9,7 +9,8 @@ import {
 import Login from "./components/Login/Login";
 import Main from "./pages/main/main";
 import SignUp from "./components/SingUp/SignUp";
-import {SnackBarContextProvider} from "./store/snackbar-context";
+import {SnackBarContextProvider} from "./store/SnackbarContext";
+import {AuthContextProvider} from "./store/AuthContext";
 
 const router = createBrowserRouter([
     {
@@ -51,9 +52,11 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-      <SnackBarContextProvider>
-      <RouterProvider router={router} />
-      </SnackBarContextProvider>
+      <AuthContextProvider>
+        <SnackBarContextProvider>
+            <RouterProvider router={router} />
+        </SnackBarContextProvider>
+      </AuthContextProvider>
   </React.StrictMode>
 );
 
