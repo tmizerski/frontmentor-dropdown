@@ -32,9 +32,8 @@ const SignUp = (props) => {
             .then(r => {
                 if (r.status === 200) {
                     snackbar.displayMsg(`Sign up successfully`, "access");
-                    console.log(r.data)
                     //save user to local storage
-                    localStorage.setItem("user", r.data)
+                    localStorage.setItem("user", JSON.stringify(r.data))
                     //update auth context
                     authContext.dispatch({type: 'LOGIN', payload: r.data})
                     setLoading(false)

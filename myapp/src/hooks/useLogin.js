@@ -14,7 +14,7 @@ export const useLogin = () => {
             email,
             password
         }).then( result => {
-           localStorage.setItem('user', result.data);
+           localStorage.setItem('user', JSON.stringify(result.data));
            authContext.dispatch({type: 'LOGIN', payload: result.data});
            setIsLoading(false)
        }).catch(error => {

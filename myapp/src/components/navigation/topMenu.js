@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useState} from "react";
 import { Link } from "react-router-dom";
 import logo from "../../images/logo.svg";
 import "./topMenu.css";
@@ -14,10 +14,10 @@ import {useLogout} from "../../hooks/useLogout";
 
 const Navigation = (props) => {
     const [activeArrow, setActiveArrow] = useState(null);
-    const [login, setLogin] = useState(null)
     const {logout} = useLogout();
     const authContext = useContext(AuthContext);
-    const snackbar = useContext(SnackbarContext);
+    const {user} = authContext;
+
 
         const navMainOptions = [{title: "Features", arrow: true}, {title: "Company", arrow: true}, {title: "Careers"}, {title: "About"}];
         const navOptions = {
@@ -55,10 +55,6 @@ const Navigation = (props) => {
             ]
         }
 
-        useEffect(()=>{
-            authContext.user ? setLogin(true) : setLogin(false);
-        },[])
-
         return(
             <div className="topMenu--container">
                 <div className="topMenu-list--container">
@@ -68,7 +64,7 @@ const Navigation = (props) => {
                     <ul className="menu-list">
                         {navMainOptions.map((main,k )=> {
                            return <li className="menu-item">
-                                <p className="menuButton" onClick={activeArrow === null ? ()=> setActiveArrow(k) : ()=>setActiveArrow(null)}>{main.title}
+                                <p className="menuButton" onClick={main.arrow ? activeArrow === null ? ()=> setActiveArrow(k) : ()=>setActiveArrow(null) : null}>{main.title}
                                     {main.arrow &&
                                         <img style={{marginLeft: "5px"}} src={activeArrow !== k ? arrowDown : arrowUp} alt="menu icon"/>}
                                 </p>
@@ -92,12 +88,17 @@ const Navigation = (props) => {
                 </div>
                 <div className="dimmer" style={activeArrow !== null ? {display: "block"} : {display: "none"}} onClick={()=>setActiveArrow(null)}></div>
                 <div className="topMenu-button--container">
-                    {!login ?
-                        <button className="loginButton menuButton"><Link to="/login">Log in</Link></button>
+                    {user ?
+                        <div>
+                            <span>{`Witaj ${user.user.firstName}!`}</span>
+                            <button className="loginButton menuButton" onClick={()=>logout()}><Link to="/">Log Out</Link></button>
+                        </div>
                     :
-                        <button className="loginButton menuButton" onClick={()=>logout()}><Link to="/">Log Out</Link></button>
+                        <div>
+                            <button className="loginButton menuButton"><Link to="/login">Log in</Link></button>
+                            <button className="registerButton menuButton"><Link to="/register">Sign Up</Link></button>
+                        </div>
                     }
-                        <button className="registerButton menuButton"><Link to="/register">Sign Up</Link></button>
                 </div>
             </div>
         )
