@@ -72,10 +72,9 @@ const SignUp = (props) => {
                         <button type="button"><Link to="/">Cancel</Link></button>
                     </div>
                     <span style={{fontSize: "12px"}}>Have an account? Login
-                        <Link to="/login" style={{color: "blue"}}>here</Link></span>
+                        <Link to="/login" style={{color: "blue", textDecoration: "underline"}}>here</Link></span>
                 </form>
             </div>
-            {snackbar.isDisplayed && <Snackbar/>}
         </div>
     )
 }

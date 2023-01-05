@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext, useEffect, useState} from "react";
 import { Link } from "react-router-dom";
 import logo from "../../images/logo.svg";
 import "./topMenu.css";
@@ -8,18 +8,19 @@ import remainderIcon from '../../images/icon-reminders.svg';
 import planningIcon from '../../images/icon-planning.svg';
 import arrowDown from '../../images/icon-arrow-down.svg';
 import arrowUp from '../../images/icon-arrow-up.svg';
+import {AuthContext} from "../../store/AuthContext";
+import SnackbarContext from "../../store/SnackbarContext";
+import {useLogout} from "../../hooks/useLogout";
 
-class Navigation extends React.Component{
-    constructor(props) {
-        super(props);
+const Navigation = (props) => {
+    const [activeArrow, setActiveArrow] = useState(null);
+    const [login, setLogin] = useState(null)
+    const {logout} = useLogout();
+    const authContext = useContext(AuthContext);
+    const snackbar = useContext(SnackbarContext);
 
-        this.state = {
-            activeArrow: null
-        }
-
-        this.navMainOptions = [{title: "Features", arrow: true}, {title: "Company", arrow: true}, {title: "Careers"}, {title: "About"}];
-
-        this.navOptions = {
+        const navMainOptions = [{title: "Features", arrow: true}, {title: "Company", arrow: true}, {title: "Careers"}, {title: "About"}];
+        const navOptions = {
             Features: [{
                 title: "Todo",
                 icon: todoIcon,
@@ -53,9 +54,11 @@ class Navigation extends React.Component{
                 },
             ]
         }
-    }
 
-    render() {
+        useEffect(()=>{
+            authContext.user ? setLogin(true) : setLogin(false);
+        },[])
+
         return(
             <div className="topMenu--container">
                 <div className="topMenu-list--container">
@@ -63,17 +66,17 @@ class Navigation extends React.Component{
                         <Link to="/"><img src={logo} alt="logo"/></Link>
                     </div>
                     <ul className="menu-list">
-                        {this.navMainOptions.map((main,k )=> {
+                        {navMainOptions.map((main,k )=> {
                            return <li className="menu-item">
-                                <p className="menuButton" onClick={this.state.activeArrow === null ? ()=>this.setState({activeArrow: k}) : ()=>this.setState({activeArrow: null})}>{main.title}
+                                <p className="menuButton" onClick={activeArrow === null ? ()=> setActiveArrow(k) : ()=>setActiveArrow(null)}>{main.title}
                                     {main.arrow &&
-                                        <img style={{marginLeft: "5px"}} src={this.state.activeArrow !== k ? arrowDown : arrowUp} alt="menu icon"/>}
+                                        <img style={{marginLeft: "5px"}} src={activeArrow !== k ? arrowDown : arrowUp} alt="menu icon"/>}
                                 </p>
                                 <div className="dropDown">
-                                    {this.navOptions[main.title] && this.state.activeArrow === k &&
+                                    {navOptions[main.title] && activeArrow === k &&
                                         <ul>
-                                            {this.navOptions[main.title]?.map((option,k)=> {
-                                                return <li onClick={()=>this.setState({activeArrow: null})}>
+                                            {navOptions[main.title]?.map((option,k)=> {
+                                                return <li onClick={()=>setActiveArrow(null)}>
                                                     {option.icon &&
                                                         <img src={option.icon} alt="menu icon"/>}
                                                     {option.path ? <Link to={option.path} >{option.title}</Link> : option.title}
@@ -87,14 +90,19 @@ class Navigation extends React.Component{
                             }
                     </ul>
                 </div>
-                <div className="dimmer" style={this.state.activeArrow !== null ? {display: "block"} : {display: "none"}} onClick={()=>this.setState({activeArrow: null})}></div>
+                <div className="dimmer" style={activeArrow !== null ? {display: "block"} : {display: "none"}} onClick={()=>setActiveArrow(null)}></div>
                 <div className="topMenu-button--container">
-                    <button className="loginButton menuButton"><Link to="/login">Login</Link></button>
-                    <button className="registerButton menuButton"><Link to="/register">Register</Link></button>
+                    {!login ?
+                        <button className="loginButton menuButton"><Link to="/login">Log in</Link></button>
+                    :
+                        <button className="loginButton menuButton" onClick={()=>logout()}><Link to="/">Log Out</Link></button>
+                    }
+                        <button className="registerButton menuButton"><Link to="/register">Sign Up</Link></button>
                 </div>
             </div>
         )
-    }
 }
+
+
 
 export default Navigation;
