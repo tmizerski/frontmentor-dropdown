@@ -1,15 +1,35 @@
 import {useContext} from "react";
 import {AuthContext} from "../../store/AuthContext";
-import {Outlet, useLocation} from "react-router";
-import {Navigate} from "react-router-dom";
+import {Outlet, useLocation, Navigate} from "react-router-dom";
+import Unauthorized from "../../pages/Unauthorized/Unauthorized";
+
 
 const Auth = ({allowedRoles}) => {
     const {user} = useContext(AuthContext);
     const location = useLocation();
+    console.log(user)
+    const authUser = () => {
+        if (user) {
+            if (allowedRoles.find((role) => user.user.role.includes(role)) || user.user.role === "admin") {
+                return <Outlet/>
+            } else {
+                console.log("unauth")
+                return <Navigate to="/unauthorized" state={{from: location}} replace={true}/>
+            }
+        } else {
+            return <Navigate to="/register" replace={true}/>
+        }
+    }
 
-    return allowedRoles.find((role)=>user.user.role.includes(role) || user.user.role === "admin") ? (
-        <Outlet /> ) : user ? <Navigate to="/unauthorized" state={{from:location}} replace/>
-        : <Navigate to="/register" state={{from: location}} replace />
+    return (
+        <>
+            {authUser()}
+        </>
+    )
+//     allowedRoles.find((role)=>user.user.role.includes(role) || user.user.role === "admin") ? (
+//         <Outlet /> ) : user !== null ? <Navigate to="/unauthorized" replace={true}/>
+//         : <Navigate to="/register" replace={true} />
+// }
 }
 
 export default Auth;

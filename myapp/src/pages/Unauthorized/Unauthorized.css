@@ -1,0 +1,22 @@
+.unauth-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.unauth-container span {
+    margin: 20px 0;
+}
+
+.return-button {
+    width: 50%;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid var(--medium-grey);
+}
+
+.return-button a {
+    color: var(--medium-grey);
+}

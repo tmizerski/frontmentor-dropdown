@@ -42,7 +42,8 @@ export const routesMap = [
                 ]
             },
             {
-                element: <Auth allowedRoles={[
+                element: <Auth allowedRoles={["admin"]} />,
+                children: [
                     {
                         path: "/remainder",
                         element: <div>remainder</div>,
@@ -52,7 +53,7 @@ export const routesMap = [
                         element: <div>planning</div>,
                     }
 
-                ]} />
+                ]
             }
         ]
     },
