@@ -1,0 +1,10 @@
+.error--handler {
+    max-width: 220px;
+    min-height: 80px;
+    margin: 20px 0;
+    padding: 1rem 1rem;
+    background: rgba(249, 31, 29, 0.6);
+    border: 1px solid red;
+    border-radius: 10px;
+    color: var(--almost-white);
+}

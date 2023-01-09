@@ -2,18 +2,21 @@ import {useContext, useState} from "react";
 import {AuthContext} from "../store/AuthContext";
 import axios from "axios";
 
-export const useLogin = () => {
-    const [error, setError ] = useState(null);
+export const useAuth = () => {
+    const [error, setError] = useState(null);
     const [loading, setIsLoading] = useState(null)
     const authContext = useContext(AuthContext);
 
-    const loginUser = async(email, password) => {
+    const signupUser = async (email, passOne, passTwo, firstName) => {
         setIsLoading(true);
         setError(null);
+        if (passOne !== passTwo) return setError("Your passwords are different")
         try {
-            const result = await axios.post("http://localhost:5000/login", {
+            const result = await axios.post("http://localhost:5000/signup", {
                 email,
-                password
+                password: passOne,
+                firstName,
+                role: "admin"
             })
 
             if (result.status === 200) {
@@ -21,10 +24,10 @@ export const useLogin = () => {
                 authContext.dispatch({type: 'LOGIN', payload: result.data});
                 setIsLoading(false)
             }
-        } catch(error) {
+        } catch (error) {
             setError(error.response.data)
         }
 
     }
-    return {loginUser, loading, error}
+    return {signupUser, loading, error}
 }

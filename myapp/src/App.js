@@ -4,10 +4,13 @@ import Navigation from "./components/navigation/topMenu";
 import { Outlet } from "react-router";
 import snackbarContext from "./store/SnackbarContext";
 import Snackbar from "./components/Snackbar/Snackbar";
+import {useLocation} from "react-router";
+import {AuthContext} from "./store/AuthContext";
 
 
 function App() {
     const snack = useContext(snackbarContext);
+    const auth = useContext(AuthContext);
   return (
     <div className="App">
       <Navigation/>

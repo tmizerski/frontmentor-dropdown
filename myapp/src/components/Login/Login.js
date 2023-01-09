@@ -1,24 +1,25 @@
 import React, {useContext, useState} from "react";
 import './Login.css';
 import {useLogin} from "../../hooks/useLogin";
-import {Link} from "react-router-dom";
+import {Link, useLocation, Navigate, useNavigate} from "react-router-dom";
 import {useSnackbar} from "../../hooks/useSnackbar";
-import snackbar from "../Snackbar/Snackbar";
+import Snackbar from "../Snackbar/Snackbar";
+import SnackbarContext from "../../store/SnackbarContext";
+import ErrorHandler from "../ErrorHandler/ErrorHandler";
+
 
 const Login = (props) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [newError, setNewError] = useState("");
     const {loginUser, error, loading} = useLogin();
-    const {showSnackbar, isDisplayed, Snackbar} = useSnackbar();
+    const {showSnackbar} = useSnackbar();
+    const snack = useContext(SnackbarContext)
 
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
         loginUser(email, password);
-        if(error){
-            console.log(error)
-            showSnackbar(error, "error");
-        }
     }
 
     return (
@@ -37,6 +38,7 @@ const Login = (props) => {
                         <button type="submit">Log in</button>
                         <button type="button">Cancel</button>
                     </div>
+                    {error && <ErrorHandler error={error} />}
                 </form>
             </div>
         </div>
