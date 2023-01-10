@@ -5,9 +5,8 @@ import Unauthorized from "../../pages/Unauthorized/Unauthorized";
 
 
 const Auth = ({allowedRoles}) => {
-    const {user} = useContext(AuthContext);
+    const user = JSON.parse(localStorage.getItem('user'));
     const location = useLocation();
-    console.log(user)
     const authUser = () => {
         if (user) {
             if (allowedRoles.find((role) => user.user.role.includes(role)) || user.user.role === "admin") {

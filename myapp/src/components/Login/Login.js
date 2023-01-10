@@ -15,11 +15,13 @@ const Login = (props) => {
     const {loginUser, error, loading} = useLogin();
     const {showSnackbar} = useSnackbar();
     const snack = useContext(SnackbarContext)
-
+    const navigate = useNavigate();
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
         loginUser(email, password);
+        navigate("/")
+
     }
 
     return (

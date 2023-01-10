@@ -16,7 +16,7 @@ export const useAuth = () => {
                 email,
                 password: passOne,
                 firstName,
-                role: "admin"
+                role: "user"
             })
 
             if (result.status === 200) {

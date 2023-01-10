@@ -1,5 +1,5 @@
 import {useContext, useState} from "react";
-import { Link } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 import "./SignUp.css";
 import Snackbar from "../Snackbar/Snackbar";
@@ -7,6 +7,7 @@ import SnackbarContext from "../../store/SnackbarContext";
 import {AuthContext} from "../../store/AuthContext";
 import {useAuth} from "../../hooks/useAuth";
 import ErrorHandler from "../ErrorHandler/ErrorHandler";
+import {useLocation} from "react-router";
 
 const SignUp = (props) => {
     const  [firstName, setFirstName] = useState('');
@@ -14,15 +15,13 @@ const SignUp = (props) => {
     const  [passTwo, setPassTwo] = useState('');
     const  [email, setEmail] = useState('');
     const {signupUser, error, loading} = useAuth();
-
-    const snackbar = useContext(SnackbarContext);
-    const authContext = useContext(AuthContext);
+    const navigate = useNavigate();
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        signupUser(email, passOne, passTwo, firstName )
-
+        signupUser(email, passOne, passTwo, firstName );
+        navigate("/");
     }
     return (
 

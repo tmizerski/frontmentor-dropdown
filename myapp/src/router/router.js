@@ -5,6 +5,7 @@ import SignUp from "../components/SingUp/SignUp";
 import React from "react";
 import Auth from '../components/Auth/Auth';
 import Unauthorized from "../pages/Unauthorized/Unauthorized";
+import CalendarScheduler from "../components/Callendar/Callendar";
 
 export const routesMap = [
     {
@@ -37,7 +38,7 @@ export const routesMap = [
                     },
                     {
                         path: "/calendar",
-                        element: <div>Calendar</div>,
+                        element: <CalendarScheduler/>,
                     },
                 ]
             },

@@ -5,9 +5,9 @@ import "./Unauthorized.css";
 const Unauthorized = () => {
     return(
         <div className="unauth-container">
-            <img src={gandalf} alt={"gandalf"} />
+            <img id="gandalf" src={gandalf} alt={"gandalf"} />
            <span>You dont have access to this site!</span>
-            <button className="return-button"><Link to="/">Return to main page</Link></button>
+            <Link to="/"><button className="return-button">Return to main page</button></Link>
         </div>
     )
 }
