@@ -1,6 +1,6 @@
 const CalendarSidebar = () => {
     return (
-        <div>sidebar</div>
+        <div className="calendar-sidebar">sidebar</div>
     )
 }
 export default CalendarSidebar;
