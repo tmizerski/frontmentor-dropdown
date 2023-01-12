@@ -6,6 +6,13 @@ import React from "react";
 import Auth from '../components/Auth/Auth';
 import Unauthorized from "../pages/Unauthorized/Unauthorized";
 import CalendarScheduler from "../components/Callendar/Callendar";
+import TablePage from "../pages/TablePage/TablePage";
+import Users from "../pages/Users/Users";
+import Parlours from "../pages/Parlours/Parlours";
+import Contractors from "../pages/Contractors/Contractors";
+import Regions from "../pages/Regions/Regions";
+import Statements from "../pages/Statements/Statements";
+import Zalando from "../pages/Zalando/Zalando";
 
 export const routesMap = [
     {
@@ -33,12 +40,32 @@ export const routesMap = [
                 element: <Auth allowedRoles={["user"]}/>,
                 children: [
                     {
-                        path: "/todoapp",
-                        element: <div>ToDo app</div>,
+                        path: "/table",
+                        element: <TablePage/>,
                     },
                     {
-                        path: "/calendar",
-                        element: <CalendarScheduler/>,
+                        path: "/users",
+                        element: <Users/>,
+                    },
+                    {
+                        path: "/parlours",
+                        element: <Parlours/>,
+                    },
+                    {
+                        path: "/contractors",
+                        element: <Contractors/>,
+                    },
+                    {
+                        path: "/regions",
+                        element: <Regions/>,
+                    },
+                    {
+                        path: "/statements",
+                        element: <Statements/>,
+                    },
+                    {
+                        path: "/zalando",
+                        element: <Zalando/>,
                     },
                 ]
             },
