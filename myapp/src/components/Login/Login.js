@@ -13,8 +13,6 @@ const Login = (props) => {
     const [password, setPassword] = useState("");
     const [newError, setNewError] = useState("");
     const {loginUser, error, loading} = useLogin();
-    const {showSnackbar} = useSnackbar();
-    const snack = useContext(SnackbarContext)
     const navigate = useNavigate();
 
     const handleOnSubmit = (e) => {
@@ -29,7 +27,7 @@ const Login = (props) => {
             <div className="login-form--container">
                 <div className="login-text--container">
                     <h2>Welcome back!</h2>
-                    <span>Dont have account yet? Please SingUp <Link to={"/signup"} style={{color: "blue", textDecoration: "underline"}}>here</Link>!</span>
+                    <span>Dont have account yet? Please SingUp <Link to={"/register"} style={{color: "blue", textDecoration: "underline"}}>here</Link>!</span>
                 </div>
                 <form onSubmit={(e)=> handleOnSubmit(e)}>
                     <label htmlFor="login-input">Email:</label>

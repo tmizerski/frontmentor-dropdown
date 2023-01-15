@@ -47,15 +47,15 @@ const Navigation = (props) => {
                     </ul>
                 </div>
                 <div className="dimmer" style={activeArrow !== null ? {display: "block"} : {display: "none"}} onClick={()=>setActiveArrow(null)}></div>
-                <div className="topMenu-button--container">
+                <div className={"topMenu-button--container"}>
                     {user ?
                         <div>
-                            <span>{`Witaj ${user.user.firstName}!`}</span>
+                            <span style={{marginRight: "10px"}}>{`Witaj ${user.user.firstName}!`}</span>
                             <button className="loginButton menuButton" onClick={()=>logout()}><Link to="/">Log Out</Link></button>
                         </div>
                     :
                         <div>
-                            <button className="loginButton menuButton"><Link to="/login">Log in</Link></button>
+                            <button className="loginButton menuButton" style={{marginRight: "10px"}}><Link to="/login">Log in</Link></button>
                             <button className="registerButton menuButton"><Link to="/register">Sign Up</Link></button>
                         </div>
                     }
