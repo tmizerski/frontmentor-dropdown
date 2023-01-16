@@ -13,17 +13,19 @@ export const loaderReducer = (state, action) => {
     }
 }
 
+//payload musi być obiektem który zawiera: completed(aktualna długość paska), data(tablica danych), actionAllowed(boolean), count(aktualny index), user
+
 export const LoaderContextProvider = ({children}) => {
     const [state, dispatch] = useReducer(loaderReducer, {
         loading: null
     })
 
     useEffect(()=>{
-        const loading = localStorage.getItem('loading')
+        const loading = localStorage.getItem('loading');
         if(loading) {
-            dispatch({type: "loading", payload: JSON.parse(loading)})
+            dispatch({type: "loading", payload: JSON.parse(loading)});
         }
-    })
+    }, [])
 
     return(
         <LoaderContext.Provider

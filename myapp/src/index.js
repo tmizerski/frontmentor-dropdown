@@ -10,12 +10,15 @@ import {AuthContextProvider} from "./store/AuthContext";
 
 import './index.css';
 import {LoaderContextProvider} from "./store/LoaderContext";
+import ErrorHandler from "./components/ErrorHandler/ErrorHandler";
+import {ErrorContextProvider} from "./store/ErrorContext";
 
 const router = createBrowserRouter(routesMap);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+      <ErrorContextProvider>
       <LoaderContextProvider>
       <AuthContextProvider>
         <SnackBarContextProvider>
@@ -23,6 +26,7 @@ root.render(
         </SnackBarContextProvider>
       </AuthContextProvider>
       </LoaderContextProvider>
+      </ErrorContextProvider>
   </React.StrictMode>
 );
 

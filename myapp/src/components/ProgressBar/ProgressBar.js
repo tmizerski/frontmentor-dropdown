@@ -25,11 +25,23 @@ const ProgressBar = ({bgcolor, completed}) => {
 
 
     return (
-        <div style={containerStyles}>
-            <div style={fillerStyles}>
-                <span style={labelStyles}>{`${completed.toFixed(2)}%`}</span>
+        <>
+            <div style={{
+                position: "fixed",
+                top: "0",
+                left: 0,
+                minWidth: "100%",
+                minHeight: "100%",
+                background: "rgba(230, 233, 236, 0.31)",
+                zIndex: 99999
+            }}>
+                <div style={containerStyles}>
+                    <div style={fillerStyles}>
+                        <span style={labelStyles}>{`${completed.toFixed(2)}%`}</span>
+                    </div>
+                </div>
             </div>
-        </div>
+        </>
     )
 }
 

@@ -8,18 +8,20 @@ import {useLocation} from "react-router";
 import {AuthContext} from "./store/AuthContext";
 import {getMonth} from "./utils/calendarUtils";
 import Loader from "./components/ProgressBar/Loader";
+import {LoaderContext} from "./store/LoaderContext";
+import {useNavigate} from "react-router-dom";
 
 
 function App() {
     const snack = useContext(snackbarContext);
     const auth = useContext(AuthContext);
+    const {loading} = useContext(LoaderContext);
+    const location = useLocation()
 
   return (
     <div className="App">
       <Navigation/>
       <Outlet/>
-        {snack.isDisplayed && <Snackbar/>}
-        {/*{process === "process" && <Loader />}*/}
     </div>
   );
 }

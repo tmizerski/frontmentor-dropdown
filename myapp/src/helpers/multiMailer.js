@@ -18,6 +18,7 @@ export const multiMailer = async (complaint, user) => {
     //         layout = "complaint/rejected"
     //         break
     // }
+    console.log(complaint);
      const res = await axios.post("http://localhost:5000/mailerTest", {
          complaint,
          user
