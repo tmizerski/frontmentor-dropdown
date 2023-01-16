@@ -4,7 +4,7 @@ import {multiMailer} from "../../helpers/multiMailer";
 const ProgressBar = ({bgcolor, completed}) => {
     const containerStyles = {
         height: 20,
-        width: '100%',
+        width: '50%',
         backgroundColor: "#e0e0de",
         margin: 50
     }
@@ -32,7 +32,11 @@ const ProgressBar = ({bgcolor, completed}) => {
                 left: 0,
                 minWidth: "100%",
                 minHeight: "100%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
                 background: "rgba(230, 233, 236, 0.31)",
+                backdropFilter: "blur(2px)",
                 zIndex: 99999
             }}>
                 <div style={containerStyles}>
