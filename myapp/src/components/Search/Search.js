@@ -1,10 +1,14 @@
 import React from "react";
 import "./Search.css";
 
-const Search = () => {
+const Search = (props) => {
     return (
         <div className={"search-container"}>
-            <input className={"search"} placeholder={"Wyszukaj..."}/>
+            <input
+                className={"search"}
+                placeholder={"Wyszukaj..."}
+                onChange={(e)=>props.filterSearch(e.target.value)}
+            />
         </div>
     )
 }

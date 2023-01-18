@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import 'semantic-ui-css/semantic.min.css'
 import {routesMap} from "./router/router";
 import {
     createBrowserRouter,
@@ -10,7 +11,6 @@ import {AuthContextProvider} from "./store/AuthContext";
 
 import './index.css';
 import {LoaderContextProvider} from "./store/LoaderContext";
-import ErrorHandler from "./components/ErrorHandler/ErrorHandler";
 import {ErrorContextProvider} from "./store/ErrorContext";
 
 const router = createBrowserRouter(routesMap);

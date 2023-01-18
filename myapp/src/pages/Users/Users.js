@@ -25,11 +25,13 @@ const Users = () => {
             <div>Breadcrumb</div>
             <DataTable
                 title={"Lista użytkowników"}
+                subTitle={"Poniższa lista nie zawiera kontrahentów i salonów"}
+                search={"firstName"}
                 fetchData={{
                     url: "http://localhost:5000/users/get",
                     options: {
-                        limit: 1,
-                        currentPage: 25
+                        limit: 25,
+                        currentPage: 1
                     }
             }}
                 columns={[{
