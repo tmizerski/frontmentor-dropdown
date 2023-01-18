@@ -6,7 +6,7 @@ import ErrorHandler from "../ErrorHandler/ErrorHandler";
 import {ErrorContext} from "../../store/ErrorContext";
 
 
-const Loader = ({data, action}) => {
+const Loader = ({data, action, bgcolor, timeout}) => {
     //action musi zwracać promise
     const [completed, setCompleted] = useState(data.completed || 0);
     const percent = Math.round(((100/data.data.length)*100))/100;
@@ -21,7 +21,6 @@ const Loader = ({data, action}) => {
             count: count+1,
             data: data.data,
             actionAllowed: actionAllowed,
-            user: "tymek"
         }
 
         localStorage.setItem('loading', JSON.stringify(currentData));
@@ -63,12 +62,12 @@ const Loader = ({data, action}) => {
     useEffect(()=> {
         setTimeout(()=>{
             addWidth()
-        }, 1000)
+        }, timeout || 1000)
     })
 
     return(
         <div style={{height: "100%"}}>
-            <ProgressBar completed={completed} bgcolor={"royalblue"} />
+            <ProgressBar completed={completed} bgcolor={bgcolor} />
         </div>
     )
 }

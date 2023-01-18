@@ -1,0 +1,17 @@
+.users-container {
+    /*height: 100%;*/
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.error-table {
+    max-width: 20%;
+}
+.table-button-holder {
+    margin: 0 auto;
+    max-width: 50%;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}

@@ -1,0 +1,37 @@
+:root {
+--table-border-color: rgba(126, 126, 126, 0.54);
+}
+
+.table-container {
+    padding: 0.5rem 1rem;
+}
+
+.table  {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    color: var(--medium-grey)
+}
+
+.table-row {
+    width: 100%;
+    border: 1px solid var(--table-border-color);
+    text-align: center;
+}
+
+.table-row td, th {
+    padding: 0.5rem;
+}
+
+.title {
+    font-size: 16px;
+}
+
+.title-span {
+    line-height: 3rem;
+}
+
+td, th {
+    text-align: left;
+}
+

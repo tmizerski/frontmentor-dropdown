@@ -16,13 +16,12 @@ const data = {
     count: 0,
     data: dataValue,
     actionAllowed: true,
-    user: "tymek"
 }
 
     return(
         <div style={{height: "100%"}}>
         <button onClick={()=>dispatch({type: 'loading', payload:data})}>Klik</button>
-            {loading && <Loader data={JSON.parse(localStorage.getItem('loading')) || loading} action={multiMailer}/>}
+            {loading && <Loader data={JSON.parse(localStorage.getItem('loading')) || loading} action={multiMailer} />}
             {error && <ErrorHandler error={error}/>}
         </div>
     )

@@ -1,49 +1,54 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
+import TableHead from "./TableHead";
+import axios from "axios";
+import "./DataTable.css";
+import {ErrorContext} from "../../store/ErrorContext";
 
 const DataTable = (props) => {
     const [data, setData] = useState(null);
     const [columns, setColumns] = useState(null);
 
+    const {dispatch} = useContext(ErrorContext);
+
     const {fetchData} = props;
 
-    const loadData = (fetchData) => {
-        setData(props.data)
+    const init = () => {
+        axios.get(fetchData.url, {
+            params: {
+                limit: fetchData.options.limit || 1,
+                currentPage: fetchData.options.currentPage || 25
+            }
+        }).then( r => {
+            setData(r.data)
+            setColumns(props.columns)
+        }).catch(err => {
+            dispatch({type: "setError", payload: err.data.message})
+        })
     }
 
-    useEffect(()=>{
-        loadData();
-    },[])
+    useEffect(() => {
+        init();
+        return ()=>{
+            return
+        }
+    }, [])
 
     return(
-        <div>
+        <div className={"table-container"}>
             <table className="table">
                 <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
-                </tr>
+                    <TableHead columns={props.columns} title={props.title}/>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr>
+                {data && Array.isArray(data) &&
+                    data.map((row, k) => {
+                        return <tr key={k} className={"table-row"}>
+                            {columns.map((col, index)=> {
+                                return <td key={index}>{col.render(row)}</td>
+                            })}
+                        </tr>
+                    })
+                }
                 </tbody>
             </table>
         </div>
