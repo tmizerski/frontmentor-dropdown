@@ -1,12 +1,16 @@
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 import DataTable from "../../components/DataTable/DataTable";
 import EsotiqButton from "../../components/EsotiqButton/EsotiqButton";
 import ErrorHandler from "../../components/ErrorHandler/ErrorHandler";
 import {ErrorContext} from "../../store/ErrorContext";
 
+
 import "./Users.css";
+import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
+import Modal from "../../components/Modal/Modal";
 
 const Users = () => {
+    const [editModal, setEditModal] = useState(false);
     const errorContext = useContext(ErrorContext);
     const {error} = errorContext;
 
@@ -16,13 +20,14 @@ const Users = () => {
     }
 
     return (
+        <>
         <div className={"users-container"}>
             {error &&
                 <div className={"error-table"}>
                     <ErrorHandler error={error} />
                 </div>
             }
-            <div>Breadcrumb</div>
+            <Breadcrumbs locationEnd={"Lista"}/>
             <DataTable
                 title={"Lista użytkowników"}
                 subTitle={"Poniższa lista nie zawiera kontrahentów i salonów"}
@@ -53,7 +58,7 @@ const Users = () => {
                         label: "akcje",
                         field: "actions",
                         render: row => <div className={"table-button-holder"}>
-                            <EsotiqButton label={"edytuj"} color={"white"} click={()=>handleOnClick()} />
+                            <EsotiqButton label={"edytuj"} color={"white"} click={()=>setEditModal(true)} />
                             <EsotiqButton label={"zablokuj"} color={"white"} bgcolor={"block"} click={()=>handleOnClick()} />
                             <EsotiqButton label={"usuń"} color={"white"} bgcolor={"delete"} click={()=>handleOnClick()} />
                         </div>
@@ -61,6 +66,16 @@ const Users = () => {
                 ]}
             />
         </div>
+            {editModal && <Modal
+                // size={"small"}
+                submit={()=>console.log("wysyłame")}
+                // content={
+                //     <Breadcrumbs/>
+                // }
+                head={"Edytuj usera?"}
+                close={()=>setEditModal(false)}
+            />}
+            </>
     )
 }
 

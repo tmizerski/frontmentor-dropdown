@@ -1,8 +1,17 @@
 .esotiq-button {
+    width: 70px;
+    height: 1.5rem;
     border-radius: 5px;
     border: none;
-    padding: 5px 1rem;
     cursor: pointer;
     outline: none;
     font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.esotiq-button button {
+    vertical-align: center;
+    text-align: center;
 }

@@ -1,9 +1,15 @@
-import React from "react";
+import React, {useState} from "react";
+import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
+import Modal from "../../components/Modal/Modal";
 
 const Regions = () => {
+    const [modal, setModal] = useState(null);
 
     return(
-        <div style={{height: "100%"}}>Regions</div>
+        <>
+            <Breadcrumbs />
+
+        </>
     )
 }
 

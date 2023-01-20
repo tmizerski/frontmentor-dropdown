@@ -36,7 +36,7 @@ const ProgressBar = ({bgcolor, completed}) => {
                 justifyContent: "center",
                 alignItems: "center",
                 background: "rgba(230, 233, 236, 0.31)",
-                backdropFilter: "blur(2px)",
+                backdropFilter: "blur(1px)",
                 zIndex: 99999
             }}>
                 <div style={containerStyles}>

@@ -1,9 +1,10 @@
 import React from "react";
+import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 
 const Zalando = () => {
 
     return(
-        <div style={{height: "100%"}}>Zalando</div>
+        <Breadcrumbs />
     )
 }
 

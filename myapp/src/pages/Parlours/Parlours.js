@@ -1,8 +1,9 @@
 import React from "react";
+import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 
 const Parlours = () => {
     return (
-        <div style={{height: "100%"}}>Salony</div>
+        <Breadcrumbs locationEnd={"Lista"}/>
     )
 }
 

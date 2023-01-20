@@ -1,0 +1,17 @@
+.breadcrumbs {
+    max-width: fit-content;
+    display: flex;
+    float: left;
+    margin-left: 30px;
+    margin-bottom: 20px;
+}
+
+.breadcrumbs, .crumb a{
+    color: var(--medium-grey);
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.crumb {
+    margin-right: 4px;
+}

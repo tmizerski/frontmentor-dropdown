@@ -1,32 +1,25 @@
 import React, {useContext, useState} from "react";
 import { Link } from "react-router-dom";
 import "./topMenu.css";
-import todoIcon from '../../images/icon-todo.svg';
-import calendarIcon from '../../images/icon-calendar.svg';
-import remainderIcon from '../../images/icon-reminders.svg';
-import planningIcon from '../../images/icon-planning.svg';
-import arrowDown from '../../images/icon-arrow-down.svg';
-import arrowUp from '../../images/icon-arrow-up.svg';
 import {AuthContext} from "../../store/AuthContext";
-// import SnackbarContext from "../../store/SnackbarContext";
 import {useLogout} from "../../hooks/useLogout";
 
+
+export const navMainOptions = [
+    {title: "Tablica", value: "table"},
+    {title: "Użytkownicy", value: "users"},
+    {title: "Salony", value: "parlours"},
+    {title: "Kontrahenci", value: "contractors"},
+    {title: "Regiony", value: "regions"},
+    {title: "Zestawienia", value: "statements"},
+    {title: "Zalando", value: "zalando"},
+];
+
+
 const Navigation = (props) => {
-    const [activeArrow, setActiveArrow] = useState(null);
     const {logout} = useLogout();
     const authContext = useContext(AuthContext);
     const {user} = authContext;
-
-
-        const navMainOptions = [
-            {title: "Tablica", value: "table"},
-            {title: "Użytkownicy", value: "users"},
-            {title: "Salony", value: "parlours"},
-            {title: "Kontrahenci", value: "contractors"},
-            {title: "Regiony", value: "regions"},
-            {title: "Zestawienia", value: "statements"},
-            {title: "Zalando", value: "zalando"},
-        ];
 
 
         return(
@@ -36,7 +29,8 @@ const Navigation = (props) => {
                         {navMainOptions.map((option,k )=> {
                            return  <li className="menu-item">
                                 <Link
-                                    to={`/${option.value}`}
+                                    to={option.value}
+                                    // onClick={}
                                 >
                                     {option.title}
                                 </Link>
@@ -46,7 +40,7 @@ const Navigation = (props) => {
                             }
                     </ul>
                 </div>
-                <div className="dimmer" style={activeArrow !== null ? {display: "block"} : {display: "none"}} onClick={()=>setActiveArrow(null)}></div>
+                {/*<div className="dimmer"></div>*/}
                 <div className={"topMenu-button--container"}>
                     {user ?
                         <div>

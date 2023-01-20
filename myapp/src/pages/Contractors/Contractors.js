@@ -1,8 +1,9 @@
 import React from "react";
+import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 
 const Contractors = () => {
     return(
-        <div style={{height: "100%"}}>Kontrahenci</div>
+        <Breadcrumbs />
     )
 }
 

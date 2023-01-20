@@ -5,6 +5,7 @@ import {LoaderContext} from "../../store/LoaderContext";
 import Loader from "../../components/ProgressBar/Loader";
 import ErrorHandler from "../../components/ErrorHandler/ErrorHandler";
 import {ErrorContext} from "../../store/ErrorContext";
+import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 
 const dataValue = [{value: 1}, {value: 2}, {value: 3},{value: 4}, {value:5}, {value: 6},{value: 7}, {value: 8}, {value: 9},]
 
@@ -20,6 +21,7 @@ const data = {
 
     return(
         <div style={{height: "100%"}}>
+            <Breadcrumbs />
         <button onClick={()=>dispatch({type: 'loading', payload:data})}>Klik</button>
             {loading && <Loader data={JSON.parse(localStorage.getItem('loading')) || loading} action={multiMailer} />}
             {error && <ErrorHandler error={error}/>}
